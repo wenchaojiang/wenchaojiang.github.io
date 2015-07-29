@@ -1,11 +1,11 @@
 # Site wide configuration
 
-title: Wenchao Jiang's Blog 
+title: Wenchao Jiang's Blog
 locale: en_US
-description: Wenchao's Tech Notes 
+description: Wenchao's Tech Notes (Booo, still under construction)
 logo: site-logo.png
 search: true
-url: http://wenchaojiang.github.io 
+url: http://wenchaojiang.github.io
 # Jekyll configuration
 
 permalink:   /:categories/:title/
@@ -30,7 +30,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 
 # Site owner
 owner:
-  name: Wenchao Jiang 
+  name: Wenchao Jiang
   avatar: bio-photo.jpg
   email: jiang.wenchao.goo@email.com
   disqus-shortname:
