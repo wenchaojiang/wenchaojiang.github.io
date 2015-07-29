@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title: Site Title
+title: Wenchao Jiang's Blog 
 locale: en_US
-description: Describe your website here.
+description: Wenchao's Tech Notes 
 logo: site-logo.png
 search: true
 url: http://wenchaojiang.github.io 
@@ -30,9 +30,9 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 
 # Site owner
 owner:
-  name: Your Name
+  name: Wenchao Jiang 
   avatar: bio-photo.jpg
-  email: you@email.com
+  email: jiang.wenchao.goo@email.com
   disqus-shortname:
   twitter: #username
   facebook: #username
