@@ -1,16 +1,13 @@
 ---
 layout: post
 title: Making an Android Kiosk App.
-excerpt: "Just about everything you'll need to style in the theme: headings, paragraphs, blockquotes, tables, code blocks, and more."
-modified: 2013-05-31
-categories: articles
+categories: blog
 tags: [Android,Kiosk]
 image:
-  feature: so-simple-sample-image-1.jpg
-  credit: WeGraphics
-  creditlink:
+  feature:
 comments: true
 share: true
+date: 2015-08-01T15:39:55-04:00
 ---
 ### Introduction
 Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.

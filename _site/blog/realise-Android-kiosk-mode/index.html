@@ -1,0 +1,410 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Making an Android Kiosk App. &#8211; Wenchao Jiang's Blog</title>
+<meta name="description" content="Introduction
+Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.
+
+">
+<meta name="keywords" content="Android, Kiosk">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Making an Android Kiosk App.">
+<meta name="twitter:description" content="Introduction
+Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.
+
+">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Making an Android Kiosk App.">
+<meta property="og:description" content="Introduction
+Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.
+
+">
+<meta property="og:url" content="http://localhost:4000/blog/realise-Android-kiosk-mode/">
+<meta property="og:site_name" content="Wenchao Jiang's Blog">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/blog/realise-Android-kiosk-mode/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Wenchao Jiang's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/theme-setup/" >Theme Setup</a></li>
+		  
+		    
+		        
+		        
+		    <li><a href="http://mademistakes.com" target="_blank">Made Mistakes</a></li>
+		  
+		    
+		        
+		    
+		    <li><a href="http://localhost:4000/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="Wenchao Jiang's Blog"><img src="http://localhost:4000/images/site-logo.png" width="200" height="200" alt="Wenchao Jiang's Blog logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">Wenchao Jiang's Blog</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Wenchao's Tech Notes (Booo, still under construction)</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#Android" title="Pages tagged Android">Android</a>&nbsp;&bull;&nbsp;<a href="http://localhost:4000/tags/#Kiosk" title="Pages tagged Kiosk">Kiosk</a></span>
+        
+          <h1 class="entry-title">Making an Android Kiosk App.</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        
+          <img src="http://localhost:4000/images/bio-photo.jpg" class="bio-photo" alt="Wenchao Jiang bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Wenchao Jiang</span></span>
+        <span class="entry-date date published"><time datetime="2015-08-01T20:39:55+01:00"><i class="fa fa-calendar-o"></i> August 01, 2015</time></span>
+        
+        
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Android,Kiosk&amp;text=Making%20an%20Android%20Kiosk%20App.&amp;url=http://localhost:4000/blog/realise-Android-kiosk-mode/" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/realise-Android-kiosk-mode/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=http://localhost:4000/blog/realise-Android-kiosk-mode/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <h3 id="introduction">Introduction</h3>
+<p>Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.</p>
+
+<p>My kiosk mode has several requirement:</p>
+
+<ol>
+  <li>lock the user in the app.</li>
+  <li>boot into the app when system start up.</li>
+  <li>the app should be full screen.</li>
+  <li>keep system awake all time.</li>
+  <li>disable volume buttons.</li>
+</ol>
+
+<p>My approaches:</p>
+
+<ol>
+  <li>use app pinning feature newly introduced in SDK level 22 to lock the user in the app.</li>
+  <li>set the app as a home intent, so system can boot into the app.</li>
+  <li>make the app full screen with immersive mode of activity.</li>
+  <li>keep system awake through sdk</li>
+  <li>disable the volume buttons through sdk</li>
+</ol>
+
+<p>Next I will introduce how to do it step by step, all the template code is available in the repo:
+<a href="https://github.com/wenchaojiang/AndroidKioskModeTemplate">AndroidKioskModeTemplate</a></p>
+
+<h3 id="configurations">Configurations</h3>
+<p>You need target Sdk level 21 for screen pinning feature.</p>
+
+<h3 id="screen-pinning">Screen pinning</h3>
+<p>Andriod 5.0 introduces the screen pinning feature, as its documentation said:
+ Once your app activates screen pinning, users cannot see notifications, access other apps, or return to the home screen, until your app exits the mode.</p>
+
+<p>The screen pinning mode can be simply calling  <code>startLockTask()</code> in your activity and exit by calling <code>stopLockTask()</code>.</p>
+
+<p>However, when <code>startLockTask()</code> called, system will ask user the permission for enterring pinning mode and user can still exit the pinning mode by touch “back and task” buttons all together. The is not “true” Kiosk that lock user in. To enable a true kiosk mode, your app need to call the <code>startLockTask()</code> as a device owner.</p>
+
+<p>To set your app as device owner, you need to implement a <code>DeviceAdminReceiver</code> class <code>MyAdmin</code>, and use the dpm tool under adb shell</p>
+
+<h4 id="implementing-a-deviceadminreceiver">Implementing a DeviceAdminReceiver</h4>
+<p>First, create a class inheriting the <code>DeviceAdminReceiver</code>, no implemenation is required.</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">wenchao</span><span class="o">.</span><span class="na">kiosk</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.app.admin.DeviceAdminReceiver</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAdmin</span> <span class="kd">extends</span> <span class="n">DeviceAdminReceiver</span><span class="o">{</span>
+
+<span class="o">}</span></code></pre></div>
+
+<p>Second, declare the receiver in <code>Manifest.xml</code>, in your <code>&lt;applicatio&gt;</code>n element</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;receiver</span> <span class="na">android:name=</span><span class="s">&quot;wenchao.kiosk.MyAdmin&quot;</span>
+            <span class="na">android:label=</span><span class="s">&quot;@string/sample_device_admin&quot;</span>
+            <span class="na">android:description=</span><span class="s">&quot;@string/sample_device_admin_description&quot;</span>
+            <span class="na">android:permission=</span><span class="s">&quot;android.permission.BIND_DEVICE_ADMIN&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;meta-data</span> <span class="na">android:name=</span><span class="s">&quot;android.app.device_admin&quot;</span> <span class="na">android:resource=</span><span class="s">&quot;@xml/my_admin&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.app.action.DEVICE_ADMIN_ENABLED&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/receiver&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.MANAGE_DEVICE_ADMINS&quot;</span> <span class="nt">/&gt;</span></code></pre></div>
+
+<p>The following line of meta-data need to match a xml resource file, in this case <code>my_admin</code></p>
+
+<p><code> &lt;meta-data android:name="android.app.device_admin" android:resource="@xml/my_admin" /&gt;</code></p>
+
+<p>The content of <code>my_admin.xml</code></p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;device-admin</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;uses-policies&gt;</span>
+        <span class="nt">&lt;limit-password</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;watch-login</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;reset-password</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;force-lock</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;wipe-data</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/uses-policies&gt;</span>
+<span class="nt">&lt;/device-admin&gt;</span></code></pre></div>
+
+<h4 id="set-your-app-as-device-owner">Set your app as device owner</h4>
+<p>Now you can set your app as deivce own with dpm command under adb shell.</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">adb</span> <span class="n">shell</span>
+<span class="n">dpm</span> <span class="n">set</span><span class="o">-</span><span class="n">device</span><span class="o">-</span><span class="n">owner</span> <span class="n">wenchao</span><span class="o">.</span><span class="na">kiosk</span><span class="o">/.</span><span class="na">MyAdmin</span></code></pre></div>
+
+<p>Replace wenchao.kiosk with your package name. <code>/.MyAdmin</code> is your receiver class, if your receiver class is in different package of you app package, specify full path such as <code>wenchao.kiosk/other.package.name.MyAdmin</code></p>
+
+<p>Now, before you call <code>startLockTask()</code>, you need to allow the your app to pin the screen as device owner</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="c1">// Set the app into full screen mode</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">getDecorView</span><span class="o">().</span><span class="na">setSystemUiVisibility</span><span class="o">(</span><span class="n">flags</span><span class="o">);</span>
+
+        <span class="c1">//Following code allow the app packages to lock task in true kiosk mode</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">wenchao</span><span class="o">.</span><span class="na">kiosk</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_lock_activity</span><span class="o">);</span>
+        <span class="c1">// get policy manager</span>
+        <span class="n">DevicePolicyManager</span> <span class="n">myDevicePolicyManager</span> <span class="o">=</span> <span class="o">(</span><span class="n">DevicePolicyManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">DEVICE_POLICY_SERVICE</span><span class="o">);</span>
+        <span class="c1">// get this app package name</span>
+        <span class="n">ComponentName</span> <span class="n">mDPM</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">MyAdmin</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">myDevicePolicyManager</span><span class="o">.</span><span class="na">isDeviceOwnerApp</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getPackageName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="c1">// get this app package name</span>
+            <span class="n">String</span><span class="o">[]</span> <span class="n">packages</span> <span class="o">=</span> <span class="o">{</span><span class="k">this</span><span class="o">.</span><span class="na">getPackageName</span><span class="o">()};</span>
+            <span class="c1">// mDPM is the admin package, and allow the specified packages to lock task</span>
+            <span class="n">myDevicePolicyManager</span><span class="o">.</span><span class="na">setLockTaskPackages</span><span class="o">(</span><span class="n">mDPM</span><span class="o">,</span> <span class="n">packages</span><span class="o">);</span>
+            <span class="n">startLockTask</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span><span class="s">&quot;Not owner&quot;</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_LONG</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span></code></pre></div>
+
+<p>Now, the home button in navigation disappear and user have no way to go out of your app. The back button is there, but it will do nothing</p>
+<figure>
+  <img src="/images/kiosk-lock.png" alt="image" />
+</figure>
+
+<h3 id="boot-into-your-kiosk-app">Boot into your kiosk app</h3>
+<p>Specify your activity as a HOME intent by modifying intent-filter of your activity in <code>Manifest.xml</code></p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;intent-filter&gt;</span>
+   <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.MAIN&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.HOME&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/intent-filter&gt;</span></code></pre></div>
+
+<p>Then, you need to manually replace default system launcher with your app by going to <code>Settings &gt; Home</code> , and choice your app as the home app. These only needs to be down once.</p>
+
+<p>Once done, if you reboot the system, you app will be booted up and pin the screen. User have not no way to access the other part of your system. Note, if your system crash, the default andriod lanucher can kick in.</p>
+
+<h3 id="full-screen">Full screen</h3>
+<p>Visible navigation bars are not ideal for my project, so I decided to hide it. You can do it by setting some system window flags.</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_LAYOUT_STABLE</span>
+            <span class="o">|</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span>
+            <span class="o">|</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span>
+            <span class="o">|</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_HIDE_NAVIGATION</span>
+            <span class="o">|</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_FULLSCREEN</span>
+            <span class="o">|</span> <span class="n">View</span><span class="o">.</span><span class="na">SYSTEM_UI_FLAG_IMMERSIVE_STICKY</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="cm">/* Set the app into full screen mode */</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">getDecorView</span><span class="o">().</span><span class="na">setSystemUiVisibility</span><span class="o">(</span><span class="n">flags</span><span class="o">);</span>
+        <span class="c1">//leave out other code ...</span>
+
+    <span class="o">}</span></code></pre></div>
+
+<p>With my Approach, a transient navigation bar will still be visible when user swipe on the screen from top or button of the screen. It will disappear after 1-2 seconds.</p>
+
+<figure>
+  <img src="/images/kiosk-fullscreen.png" alt="image" />
+</figure>
+
+<h3 id="keep-device-awake">Keep device awake</h3>
+<p>This can be simply done by putting a line in <code>Manifest.xml</code>, under your activity.
+<code>android:keepScreenOn="true"</code></p>
+
+<h3 id="disable-volume-buttons">Disable volume buttons</h3>
+<p>This can be down by trapping volume up and down event.</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onKeyDown</span><span class="o">(</span><span class="kt">int</span> <span class="n">keyCode</span><span class="o">,</span> <span class="n">KeyEvent</span> <span class="n">event</span><span class="o">){</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">keyCode</span> <span class="o">==</span> <span class="n">KeyEvent</span><span class="o">.</span><span class="na">KEYCODE_VOLUME_UP</span><span class="o">){</span>
+            <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">&quot;Volume button is disabled&quot;</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">keyCode</span> <span class="o">==</span> <span class="n">KeyEvent</span><span class="o">.</span><span class="na">KEYCODE_VOLUME_DOWN</span><span class="o">){</span>
+            <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">&quot;Volume button is disabled&quot;</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">onKeyDown</span><span class="o">(</span><span class="n">keyCode</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+    <span class="o">}</span></code></pre></div>
+
+<p>You programmatically set the volumes to max or mute as well</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setVolumMax</span><span class="o">(){</span>
+        <span class="n">AudioManager</span> <span class="n">am</span> <span class="o">=</span> <span class="o">(</span><span class="n">AudioManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">AUDIO_SERVICE</span><span class="o">);</span>
+        <span class="n">am</span><span class="o">.</span><span class="na">setStreamVolume</span><span class="o">(</span>
+                <span class="n">AudioManager</span><span class="o">.</span><span class="na">STREAM_SYSTEM</span><span class="o">,</span>
+                <span class="n">am</span><span class="o">.</span><span class="na">getStreamMaxVolume</span><span class="o">(</span><span class="n">AudioManager</span><span class="o">.</span><span class="na">STREAM_SYSTEM</span><span class="o">),</span>
+                <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span></code></pre></div>
+
+<h3 id="disable-power-button">Disable power button</h3>
+<p>Ideally I want to do this, but it seems not easy without modification of firmwares.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/blog/hello-world/" class="btn" title="Hello World">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2015 Wenchao Jiang. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>
