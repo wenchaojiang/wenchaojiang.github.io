@@ -5,7 +5,7 @@ locale: en_US
 description: Wenchao's Tech Notes (Booo, still under construction)
 logo: site-logo.png
 search: true
-url: http://wenchaojiang.github.io 
+url: http://wenchaojiang.github.io
 # Jekyll configuration
 
 permalink:   /:categories/:title/
@@ -46,7 +46,7 @@ owner:
   weibo: #userid
   google:
     plus: #username
-    analytics:
+    analytics: UA-65860660-1
     verify:
     ad-client:
     ad-slot:
