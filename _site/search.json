@@ -3,7 +3,7 @@
   
     {
       "title"			: "Making an Android Kiosk App.",
-      "link"			: "http://localhost:4000/blog/realise-Android-kiosk-mode/",
+      "link"			: "http://wenchaojiang.github.io/blog/realise-Android-kiosk-mode/",
       "excerpt"		: "<h3 id="introduction">Introduction</h3>
 <p>Motivation of this article is to write down how to realise a Kiosk mode App, through which a user locked in and can not mess around with other system functionalities. My approach does not require root.</p>
 
@@ -14,7 +14,7 @@
   
     ,{
       "title"			: "Hello World",
-      "link"			: "http://localhost:4000/blog/hello-world/",
+      "link"			: "http://wenchaojiang.github.io/blog/hello-world/",
       "excerpt"		: ""
     }
   
@@ -22,7 +22,7 @@
   
     ,{
       "title"			: "Override Author Byline Test Post",
-      "link"			: "http://localhost:4000/articles/author-override/",
+      "link"			: "http://wenchaojiang.github.io/articles/author-override/",
       "excerpt"		: "An article to test overriding the default site author."
     }
   
@@ -30,7 +30,7 @@
   
     ,{
       "title"			: "Syntax Highlighting Post",
-      "link"			: "http://localhost:4000/articles/code-highlighting-post/",
+      "link"			: "http://wenchaojiang.github.io/articles/code-highlighting-post/",
       "excerpt"		: "Demo post displaying the various ways of highlighting code in Markdown."
     }
   
@@ -38,7 +38,7 @@
   
     ,{
       "title"			: "Sample Link Post",
-      "link"			: "http://localhost:4000/articles/sample-link-post/",
+      "link"			: "http://wenchaojiang.github.io/articles/sample-link-post/",
       "excerpt"		: "Example and code for using link posts."
     }
   
@@ -46,7 +46,7 @@
   
     ,{
       "title"			: "A Post with a Video",
-      "link"			: "http://localhost:4000/articles/video-post/",
+      "link"			: "http://wenchaojiang.github.io/articles/video-post/",
       "excerpt"		: "Custom written post descriptions are the way to go... if you're not lazy."
     }
   
@@ -54,7 +54,7 @@
   
     ,{
       "title"			: "Post with Large Feature Image and Text",
-      "link"			: "http://localhost:4000/articles/readability-feature-post/",
+      "link"			: "http://wenchaojiang.github.io/articles/readability-feature-post/",
       "excerpt"		: "Custom written post descriptions are the way to go... if you're not lazy."
     }
   
@@ -62,7 +62,7 @@
   
     ,{
       "title"			: "A Post with Images",
-      "link"			: "http://localhost:4000/articles/sample-post-images/",
+      "link"			: "http://wenchaojiang.github.io/articles/sample-post-images/",
       "excerpt"		: "Examples and code for displaying images in posts."
     }
   
@@ -70,7 +70,7 @@
   
     ,{
       "title"			: "Testing Readability with a Bunch of Text",
-      "link"			: "http://localhost:4000/articles/readability-post/",
+      "link"			: "http://wenchaojiang.github.io/articles/readability-post/",
       "excerpt"		: "A ton of text to test readability."
     }
   
@@ -94,7 +94,7 @@
   
     ,{
       "title"			: "About the Jekyll Theme",
-      "link"			: "http://localhost:4000/about/",
+      "link"			: "http://wenchaojiang.github.io/about/",
       "excerpt"		: "So Simple is a responsive Jekyll theme for your words and images."
     }
   
@@ -102,7 +102,7 @@
   
     ,{
       "title"			: "Theme Setup",
-      "link"			: "http://localhost:4000/theme-setup/",
+      "link"			: "http://wenchaojiang.github.io/theme-setup/",
       "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
     }
   
